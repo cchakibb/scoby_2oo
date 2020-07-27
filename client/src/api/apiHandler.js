@@ -50,4 +50,16 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+  getOneItem(id) {
+    return service.get(`/${id}`);
+  },
+  createOneItem(data) {
+    return service.post("/api/items/", data);
+  },
+  updateOneItem(id, data) {
+    return service.patch(`/api/items/${id}`, data);
+  },
+  deleteOneItem(id) {
+    return service.delete(`/api/items/${id}`);
+  },
 };
