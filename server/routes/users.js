@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const userModel = require("./../models/User");
 
-router.get("/", function (req, res, next) {
+router.patch("/me", function (req, res, next) {
   res.send("respond with a resource");
 });
 

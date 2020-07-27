@@ -6,6 +6,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const session = require("express-session");
+const cors = require("cors");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const app = express();
@@ -29,6 +30,14 @@ app.use(
   })
 );
 
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    optionsSuccessStatus: 200,
+    credentials: true,
+  })
+);
+
 /*
  * Routes
  */
@@ -36,9 +45,11 @@ app.use(
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
+const itemRoutes = require("./routes/items");
 
 app.use("/", indexRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/items", itemRoutes);
 
 module.exports = app;
